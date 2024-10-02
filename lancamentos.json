@@ -1,0 +1,132 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Lançamentos Futuros em Conta Corrente",
+        "version": "1.0.0",
+        "description": "API para trazer os lançamentos futuros de uma conta corrente"
+    },
+    "paths": {
+        "/api/lancamentos/v1": {
+            "summary": "API de Lançamentos",
+            "description": "API para trazer os lançamentos futuros de uma agência/conta",
+            "get": {
+                "tags": [
+                    "Lançamentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "agencia",
+                        "description": "Número da Agência",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "conta",
+                        "description": "Número da conta",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "dataInicio",
+                        "description": "Data de início no formato yyyymmdd",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "dataFim",
+                        "description": "Data de início no formato yyyymmdd",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/Lancamentos"
+                    }
+                },
+                "summary": "Lançamentos de uma Conta"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Lancamentos": {
+                "description": "Lançamentos de uma Conta",
+                "type": "object",
+                "properties": {
+                    "lista": {
+                        "description": "Lista de lançamentos",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Lancamento"
+                        }
+                    }
+                }
+            },
+            "Lancamento": {
+                "title": "Root Type for Lancamento",
+                "description": "Lançamento de uma conta",
+                "type": "object",
+                "properties": {
+                    "moeda": {
+                        "$ref": "#/components/schemas/moeda",
+                        "description": ""
+                    },
+                    "valor": {
+                        "$ref": "#/components/schemas/valor",
+                        "description": ""
+                    },
+                    "descricao": {
+                        "$ref": "#/components/schemas/descricao",
+                        "description": ""
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/data",
+                        "description": ""
+                    }
+                },
+                "example": {
+                    "Lancamento": {
+                        "moeda": "R$",
+                        "valor": "10,00",
+                        "descricao": "Transf. crédito",
+                        "data": "04/07/2024"
+                    }
+                }
+            },
+            "moeda": {
+                "description": "",
+                "type": "object"
+            },
+            "valor": {
+                "description": "",
+                "type": "object"
+            },
+            "descricao": {
+                "description": "",
+                "type": "object"
+            },
+            "data": {
+                "description": "",
+                "type": "object"
+            }
+        },
+        "responses": {
+            "Lancamentos": {
+                "description": "Lançamentos de uma conta"
+            }
+        }
+    }
+}

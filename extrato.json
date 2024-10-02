@@ -1,0 +1,132 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Extrato em Conta Corrente",
+        "version": "1.0.0",
+        "description": "API para trazer o extrato de uma conta corrente"
+    },
+    "paths": {
+        "/api/extrato/v1": {
+            "summary": "API de Extrato",
+            "description": "API para trazer o extrato de uma agência/conta",
+            "get": {
+                "tags": [
+                    "Extrato"
+                ],
+                "parameters": [
+                    {
+                        "name": "agencia",
+                        "description": "Número da Agência",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "conta",
+                        "description": "Número da conta",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "dataInicio",
+                        "description": "Data de início no formato yyyymmdd",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "dataFim",
+                        "description": "Data de início no formato yyyymmdd",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/Movimentos"
+                    }
+                },
+                "summary": "Extrato de uma Conta"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Movimentos": {
+                "description": "Extrato de uma Conta",
+                "type": "object",
+                "properties": {
+                    "lista": {
+                        "description": "Lista de movimentos",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Movimento"
+                        }
+                    }
+                }
+            },
+            "Movimento": {
+                "title": "Root Type for Movimento",
+                "description": "Movimento de uma conta",
+                "type": "object",
+                "properties": {
+                    "moeda": {
+                        "$ref": "#/components/schemas/moeda",
+                        "description": ""
+                    },
+                    "valor": {
+                        "$ref": "#/components/schemas/valor",
+                        "description": ""
+                    },
+                    "descricao": {
+                        "$ref": "#/components/schemas/descricao",
+                        "description": ""
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/data",
+                        "description": ""
+                    }
+                },
+                "example": {
+                    "Movimento": {
+                        "moeda": "R$",
+                        "valor": "10,00",
+                        "descricao": "Transf. crédito",
+                        "data": "04/07/2024"
+                    }
+                }
+            },
+            "moeda": {
+                "description": "",
+                "type": "object"
+            },
+            "valor": {
+                "description": "",
+                "type": "object"
+            },
+            "descricao": {
+                "description": "",
+                "type": "object"
+            },
+            "data": {
+                "description": "",
+                "type": "object"
+            }
+        },
+        "responses": {
+            "Movimentos": {
+                "description": "Movimentos de uma conta"
+            }
+        }
+    }
+}
