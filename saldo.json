@@ -71,6 +71,23 @@
         },
         "responses": {
             "Saldo": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Saldo"
+                        },
+                        "examples": {
+                            "Saldo": {
+                                "value": {
+                                    "Saldo": {
+                                        "moeda": "R$",
+                                        "valor": "10,00"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "description": "saldo da conta"
             }
         }
